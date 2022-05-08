@@ -34,7 +34,6 @@ def makeBtn(name):
 
 
 def makeMarkUp(list):
-    print(list)
     markup = types.ReplyKeyboardMarkup()
     for i in range(0, len(list)):
         if (i % 3 == 0):
