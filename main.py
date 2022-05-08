@@ -6,7 +6,6 @@ from requests.auth import HTTPBasicAuth
 from flask import Flask, request
 
 token = os.environ.get("BUS_BOT_KEY")
-print(os.environ.get("BUS_BOT_KEY"))
 bot = TeleBot(token)
 authKey = HTTPBasicAuth(os.environ.get("API_USERNAME"), os.environ.get("API_PW"))
 url = os.environ.get("API_URL")
