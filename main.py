@@ -78,17 +78,17 @@ def start(message):
     bot.send_message(message.chat.id, intro)
 
 
-@bot.message_handler(commands=["queryBusTiming"])
+@bot.message_handler(commands=["stops"])
 def queryBusTiming(message):
     bot.send_message(message.chat.id, "Which Bus Stop?", reply_markup=BUS_STOP_NAMES_MARKUP)
 
 
-@bot.message_handler(commands=["queryBusService"])
+@bot.message_handler(commands=["services"])
 def queryBusService(message):
     bot.send_message(message.chat.id, "Which Bus Service? ", reply_markup=BUS_SERVICES_MARKUP)
 
 
-@bot.message_handler(commands=["getRouteMap"])
+@bot.message_handler(commands=["map"])
 def sendRouteMap(message):
     routeMap = open("Network-Map.jpeg", "rb")
     bot.send_photo(message.chat.id, routeMap)
