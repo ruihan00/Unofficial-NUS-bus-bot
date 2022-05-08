@@ -6,6 +6,7 @@ from requests.auth import HTTPBasicAuth
 from flask import Flask, request
 
 token = os.environ.get("BUS_BOT_KEY")
+print(os.environ.get("BUS_BOT_KEY"))
 bot = TeleBot(token)
 authKey = HTTPBasicAuth(os.environ.get("API_USERNAME"), os.environ.get("API_PW"))
 url = os.environ.get("API_URL")
@@ -177,7 +178,7 @@ def getMessage():
 @server.route('/')
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url = "https://ruihanbot.herokuapp.com/" + token)
+    bot.set_webhook(url = "https://unofficial-nus-bus-bot.herokuapp.com/" + token)
     return "!", 200
 
 if __name__ == "__main__":
