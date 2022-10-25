@@ -21,7 +21,7 @@ BUS_STOP_NAMES = ['OTH', 'BG-MRT', 'CG',
                   'S17', 'KR-MRT-OPP', 'PGPR',
                   'HSSML-OPP', 'NUSS-OPP', 'COM2',
                   'LT13-OPP', 'LT13', 'AS5',
-                  'BIZ2', 'KRB', 'TCOMS', 'TCOMS-OPP']
+                  'BIZ2', 'KRB', 'TCOMS', 'TCOMS-OPP', "COM3"]
 
 BUS_SERVICES = ['A1', 'A2', 'BTC', 'D1', 'D2', 'E', 'K', 'L']
 
