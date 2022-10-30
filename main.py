@@ -124,7 +124,8 @@ def findTiming(message):
                     if (i < len(serviceList) - 1):
                         str += " | "
 
-    msgid = bot.send_message(message.chat.id, str)
+    msgData = bot.send_message(message.chat.id, str)
+    msgid = msgData.json['message_id']
     bot.edit_message_reply_markup(message.chat.id, msgid, reply_markup=genRefreshMarkup(message.text))
 
 @bot.callback_query_handler(func=lambda call: True)
