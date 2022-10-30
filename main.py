@@ -1,10 +1,11 @@
+import json
 import math
 from telebot import TeleBot, types
 import requests
 import os
 from requests.auth import HTTPBasicAuth
 from flask import Flask, request
-
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 token = os.environ.get("BUS_BOT_KEY")
 bot = TeleBot(token)
 authKey = HTTPBasicAuth(os.environ.get("API_USERNAME"), os.environ.get("API_PW"))
@@ -32,6 +33,12 @@ BUS_SERVICES_MARKUP = None
 def makeBtn(name):
     return types.KeyboardButton(name)
 
+def genRefreshMarkup(stop):
+    markup = InlineKeyboardMarkup()
+    markup.row_width = 1
+    markup.one_time_keyboard = True
+    markup.add(InlineKeyboardButton("Refresh", callback_data=stop))
+    return markup
 
 def makeMarkUp(list):
     markup = types.ReplyKeyboardMarkup()
@@ -117,7 +124,35 @@ def findTiming(message):
                     if (i < len(serviceList) - 1):
                         str += " | "
 
-    bot.send_message(message.chat.id, str)
+    msgid = bot.send_message(message.chat.id, str)
+    bot.edit_message_reply_markup(message.chat.id, msgid, reply_markup=genRefreshMarkup(message.text))
+
+@bot.callback_query_handler(func=lambda call: True)
+def refreshMessgae(call):
+    stopName = call.data
+    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=None)
+    param = {"busstopname": stopName}
+    data = requests.get(url + "/ShuttleService", params=param, auth=authKey).json()["ShuttleServiceResult"]
+    busStopName = data["caption"]
+    str = busStopName
+
+    for busService in data["shuttles"]:
+        busServiceName = busService["name"]
+        str += f"\n \n{busServiceName}: "
+        if "PUB" in busServiceName:
+            str += f"{busService['arrivalTime']}"
+        else:
+            serviceList = busService["_etas"]
+            if (len(serviceList) == 0):
+                str += "No Service"
+            else:
+                for i in range(0, len(serviceList)):
+                    bus = busService["_etas"][i]
+                    str += f"{bus['eta']}"
+                    if (i < len(serviceList) - 1):
+                        str += " | "
+    bot.edit_message_text(str, call.message.chat.id, call.message.message_id)
+    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=genRefreshMarkup(stopName))
 
 
 @bot.message_handler(func=lambda message: message.text in BUS_SERVICES, content_types=["text"])
@@ -132,6 +167,8 @@ def findRoute(message):
             str += "\n   ⇣   \n"
 
     bot.send_message(message.chat.id, str)
+
+
 
 # @bot.message_handler(commands=["test"])
 # def test(message):
