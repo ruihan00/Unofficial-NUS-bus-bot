@@ -176,7 +176,7 @@ def getMessage():
 @server.route('/')
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url = "https://unofficial-nus-bus-bot.herokuapp.com/" + token)
+    bot.set_webhook(url = "ruihanbusbot.netlify.app/" + token)
     return "!", 200
 
 if __name__ == "__main__":
