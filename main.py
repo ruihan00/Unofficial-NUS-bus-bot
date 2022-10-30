@@ -154,6 +154,7 @@ def refreshMessgae(call):
                         str += " | "
     bot.edit_message_text(str, call.message.chat.id, call.message.message_id)
     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=genRefreshMarkup(stopName))
+    return None
 
 
 @bot.message_handler(func=lambda message: message.text in BUS_SERVICES, content_types=["text"])
