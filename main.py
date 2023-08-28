@@ -159,7 +159,8 @@ def refreshMessgae(call):
                         str += " | "
     bot.edit_message_text(str, call.message.chat.id, call.message.message_id)
     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=genRefreshMarkup(stopName))
-    bot.answer_callback_query(call.id, 'Bus timings updated!', show_alert=True)
+    bot.answer_callback_query(call.id, 'Bus timings updated!', show_alert=False)
+
 @bot.message_handler(func=lambda message: message.text in BUS_SERVICES, content_types=["text"])
 def findRoute(message):
     param = {"route_code": message.text}
