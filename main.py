@@ -229,7 +229,7 @@ def webhook():
 def mealStart(message):
     intro = """Hi! I'm meal meal"""
     mealbot.send_message(message.chat.id, intro)
-@server.route('/mealbot/' + token, methods = ["POST"])
+@server.route('/mealbot/' + mealToken, methods = ["POST"])
 def getMealMessage():
     json_string = request.get_data().decode('utf-8')
     update = types.Update.de_json(json_string)
