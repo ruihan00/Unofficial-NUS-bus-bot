@@ -10,7 +10,9 @@ from flask import Flask, request
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 # token = os.environ.get("BUS_BOT_KEY")
 token = os.environ.get("BUS_BOT_KEY")
+mealToken = "6437851265:AAEsbFOBQmXZXTvyKUCroJu5XjkaQAV5hQo"
 bot = TeleBot(token)
+mealbot = TeleBot(mealToken)
 # authKey = HTTPBasicAuth(os.environ.get("API_USERNAME"), os.environ.get("API_PW"))
 authKey = HTTPBasicAuth(os.environ.get("API_USERNAME"), os.environ.get("API_PW"))
 # url = os.environ.get("API_URL")
@@ -209,20 +211,42 @@ def findNearestBusStop(message):
     bot.send_location(message.chat.id, latitude=nearestStop["latitude"], longitude=nearestStop["longitude"])
     bot.send_message(message.chat.id, msg)
 
-@server.route('/' + token, methods = ["POST"])
+@server.route('/nusbusbot' + token, methods = ["POST"])
 def getMessage():
     json_string = request.get_data().decode('utf-8')
     update = types.Update.de_json(json_string)
     bot.process_new_updates([update])
     return "!", 200
 
-@server.route('/')
+@server.route('/nusbusbot')
 def webhook():
     bot.delete_webhook()
     bot.remove_webhook()
-    bot.set_webhook(url = "https://bus-bot.onrender.com/" + token)
+    bot.set_webhook(url = "https://bus-bot.onrender.com/nusbusbot/" + token)
     return "!", 200
 
+@mealbot.message_handler(commands=["start", "help"])
+def start(message):
+    intro = """Hi! This is an unofficial NUS Bus Info bot \n
+/help : Open Guide \n
+/queryBusTiming : Open Bus Stop keyboard \n
+/queryBusService : Open Bus Service keyboard \n
+/getRouteMap : Open Bus Route Map \n
+ Send a location and find the nearest Bus Stop!"""
+    bot.send_message(message.chat.id, intro)
+@server.route('/mealbot' + token, methods = ["POST"])
+def getMessage():
+    json_string = request.get_data().decode('utf-8')
+    update = types.Update.de_json(json_string)
+    bot.process_new_updates([update])
+    return "!", 200
+
+@server.route('/mealbot')
+def webhook():
+    bot.delete_webhook()
+    bot.remove_webhook()
+    bot.set_webhook(url = "https://bus-bot.onrender.com/mealbot/" + token)
+    return "!", 200
 if __name__ == "__main__":
     server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
 
