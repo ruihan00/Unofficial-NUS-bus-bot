@@ -211,7 +211,7 @@ def findNearestBusStop(message):
     bot.send_location(message.chat.id, latitude=nearestStop["latitude"], longitude=nearestStop["longitude"])
     bot.send_message(message.chat.id, msg)
 
-@server.route('/nusbusbot' + token, methods = ["POST"])
+@server.route('/nusbusbot/' + token, methods = ["POST"])
 def getMessage():
     json_string = request.get_data().decode('utf-8')
     update = types.Update.de_json(json_string)
@@ -234,7 +234,7 @@ def mealStart(message):
 /getRouteMap : Open Bus Route Map \n
  Send a location and find the nearest Bus Stop!"""
     bot.send_message(message.chat.id, intro)
-@server.route('/mealbot' + token, methods = ["POST"])
+@server.route('/mealbot/' + token, methods = ["POST"])
 def getMealMessage():
     json_string = request.get_data().decode('utf-8')
     update = types.Update.de_json(json_string)
