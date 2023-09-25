@@ -226,7 +226,7 @@ def webhook():
     return "!", 200
 
 @mealbot.message_handler(commands=["start", "help"])
-def start(message):
+def mealStart(message):
     intro = """Hi! This is an unofficial NUS Bus Info bot \n
 /help : Open Guide \n
 /queryBusTiming : Open Bus Stop keyboard \n
@@ -235,14 +235,14 @@ def start(message):
  Send a location and find the nearest Bus Stop!"""
     bot.send_message(message.chat.id, intro)
 @server.route('/mealbot' + token, methods = ["POST"])
-def getMessage():
+def getMealMessage():
     json_string = request.get_data().decode('utf-8')
     update = types.Update.de_json(json_string)
     bot.process_new_updates([update])
     return "!", 200
 
 @server.route('/mealbot')
-def webhook():
+def mealWebhook():
     bot.delete_webhook()
     bot.remove_webhook()
     bot.set_webhook(url = "https://bus-bot.onrender.com/mealbot/" + token)
