@@ -238,14 +238,14 @@ def mealStart(message):
 def getMealMessage():
     json_string = request.get_data().decode('utf-8')
     update = types.Update.de_json(json_string)
-    bot.process_new_updates([update])
+    mealbot.process_new_updates([update])
     return "!", 200
 
 @server.route('/mealbot')
 def mealWebhook():
-    bot.delete_webhook()
-    bot.remove_webhook()
-    bot.set_webhook(url = "https://bus-bot.onrender.com/mealbot/" + mealToken)
+    mealbot.delete_webhook()
+    mealbot.remove_webhook()
+    mealbot.set_webhook(url = "https://bus-bot.onrender.com/mealbot/" + mealToken)
     return "!", 200
 if __name__ == "__main__":
     server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
