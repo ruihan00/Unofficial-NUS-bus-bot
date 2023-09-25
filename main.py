@@ -227,13 +227,8 @@ def webhook():
 
 @mealbot.message_handler(commands=["start", "help"])
 def mealStart(message):
-    intro = """Hi! This is an unofficial NUS Bus Info bot \n
-/help : Open Guide \n
-/queryBusTiming : Open Bus Stop keyboard \n
-/queryBusService : Open Bus Service keyboard \n
-/getRouteMap : Open Bus Route Map \n
- Send a location and find the nearest Bus Stop!"""
-    bot.send_message(message.chat.id, intro)
+    intro = """Hi! I'm meal meal"""
+    mealbot.send_message(message.chat.id, intro)
 @server.route('/mealbot/' + token, methods = ["POST"])
 def getMealMessage():
     json_string = request.get_data().decode('utf-8')
