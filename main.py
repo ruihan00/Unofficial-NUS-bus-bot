@@ -8,9 +8,10 @@ import os
 from requests.auth import HTTPBasicAuth
 from flask import Flask, request
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+from affirmation_bot import affirmations_bot, affirmations_token
 # token = os.environ.get("BUS_BOT_KEY")
 token = os.environ.get("BUS_BOT_KEY")
-mealToken = "6437851265:AAEsbFOBQmXZXTvyKUCroJu5XjkaQAV5hQo"
+mealToken = os.environ.get("MEAL_BOT_TOKEN")
 bot = TeleBot(token)
 mealbot = TeleBot(mealToken)
 # authKey = HTTPBasicAuth(os.environ.get("API_USERNAME"), os.environ.get("API_PW"))
@@ -241,6 +242,20 @@ def mealWebhook():
     mealbot.delete_webhook()
     mealbot.remove_webhook()
     mealbot.set_webhook(url = "https://bus-bot.onrender.com/mealbot/" + mealToken)
+    return "!", 200
+
+@server.route('/affirmationbot/' + affirmations_token, methods = ["POST"])
+def getAffirmationMessage():
+    json_string = request.get_data().decode('utf-8')
+    update = types.Update.de_json(json_string)
+    affirmations_bot.process_new_updates([update])
+    return "!", 200
+
+@server.route('/affirmationbot')
+def affirmationWebhook():
+    affirmations_bot.delete_webhook()
+    affirmations_bot.remove_webhook()
+    affirmations_bot.set_webhook(url = "https://bus-bot.onrender.com/affirmationbot/" + affirmations_token)
     return "!", 200
 if __name__ == "__main__":
     server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
