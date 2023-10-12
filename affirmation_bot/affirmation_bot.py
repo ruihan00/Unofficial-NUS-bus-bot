@@ -8,6 +8,7 @@ affirmations_bot = TeleBot(affirmations_token)
 affirmations_bot_route = Blueprint('affirmations_routes', __name__)
 @affirmations_bot.message_handler(commands=["start", "help"])
 def start(message):
+    affirmations_bot.send_message(message.chat.id, "hi")
     with open("./affirmations.json", 'r') as f:
         array = json.loads(f.read())
         length = len(array)
