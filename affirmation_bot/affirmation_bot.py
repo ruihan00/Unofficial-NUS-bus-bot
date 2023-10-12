@@ -21,7 +21,7 @@ def getAffirmationMessage():
     affirmations_bot.process_new_updates([update])
     return "!", 200
 
-@affirmations_bot.route('')
+@affirmations_bot_route.route('')
 def affirmationWebhook():
     affirmations_bot.delete_webhook()
     affirmations_bot.remove_webhook()
