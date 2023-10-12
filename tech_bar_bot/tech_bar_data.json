@@ -1,0 +1,16 @@
+{
+    "478840739": {
+        "firstName": "Rui Han",
+        "lastName": null,
+        "quarantineDate": "06/11/2023",
+        "userName": "ruiiihan",
+        "daysSinceLastQuarantine": 0
+    },
+    "47884073": {
+        "firstName": "Daryl",
+        "lastName": null,
+        "quarantineDate": null,
+        "userName": "daryl",
+        "daysSinceLastQuarantine": 1
+    }
+}
