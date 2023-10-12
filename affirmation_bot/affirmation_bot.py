@@ -25,5 +25,5 @@ def getAffirmationMessage():
 def affirmationWebhook():
     affirmations_bot.delete_webhook()
     affirmations_bot.remove_webhook()
-    affirmations_bot.set_webhook(url = "https://bus-bot.onrender.com/affirmationbot/" + affirmations_token)
+    affirmations_bot.set_webhook(url = "https://bus-bot.onrender.com/affirmationsBot/" + affirmations_token)
     return "Webhook set", 200
