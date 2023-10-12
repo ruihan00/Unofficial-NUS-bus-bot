@@ -1,9 +1,14 @@
+import os
+
 import telebot
+from telebot import types
 import time
 import datetime
+from flask import Blueprint, request
 
-token = "5645308260:AAH11fNWfW5AjdyXMxD1b0Ai41GaWiN3uiM"
+token = os.environ.get('KICK_BOT_TOKEN')
 bot = telebot.TeleBot(token)
+kickbot_route = Blueprint('kickbot_routes', __name__)
 dict = {}
 cap = 4
 @bot.message_handler(commands=['fku'])
@@ -49,4 +54,17 @@ def kick(msg):
     cap = int(msg.text.replace("/set", ""))
     bot.send_message(msg.chat.id, f"Vote cap set to {cap}")
 
-bot.infinity_polling()
+
+@kickbot_route.route(f'/{token}', methods = ["POST"])
+def getAffirmationMessage():
+    json_string = request.get_data().decode('utf-8')
+    update = types.Update.de_json(json_string)
+    bot.process_new_updates([update])
+    return "!", 200
+
+@kickbot_route.route('')
+def affirmationWebhook():
+    bot.delete_webhook()
+    bot.remove_webhook()
+    bot.set_webhook(url = "https://bus-bot.onrender.com/kickBot/" + token)
+    return "Webhook set", 200
