@@ -4,7 +4,7 @@ from busbot.main import bus_bot_route
 import os
 
 server = Flask(__name__)
-@server.route('/' , methods = ["POST"])
+@server.route('/' , methods = ["GET"])
 def getMessage():
     return "Rui Han's bot farm", 200
 
