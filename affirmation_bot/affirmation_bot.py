@@ -70,4 +70,4 @@ def dailyJob():
     subscribers = get_all_subscribers()
     quote = getRandomAffirmation()
     for sub in subscribers:
-        affirmations_bot.send_message(sub.chatid, quote)
+        affirmations_bot.send_message(sub['chatid'], quote)
