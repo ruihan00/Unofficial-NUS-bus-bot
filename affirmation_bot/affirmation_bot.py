@@ -15,7 +15,7 @@ def getRandomAffirmation():
         array = json.loads(f.read())
         length = len(array)
         rand = random.randint(0, length - 1)
-    return array(rand)
+    return array[rand]
 @affirmations_bot.message_handler(commands=["start"])
 def start(message):
 
