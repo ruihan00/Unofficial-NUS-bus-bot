@@ -2,3 +2,5 @@ pytelegrambotapi
 requests
 flask
 decouple
+python-dotenv
+firebase-admin
