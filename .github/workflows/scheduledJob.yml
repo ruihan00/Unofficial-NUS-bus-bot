@@ -2,7 +2,7 @@ name: Daily Schedule
 
 on:
   schedule:
-    - cron: '0 15 * * *'  # Runs every day at 10 AM SGT (2 AM UTC)
+    - cron: '30 15 * * *'  # Runs every day at 10 AM SGT (2 AM UTC)
 
 jobs:
   run_python_script:
@@ -15,7 +15,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.x  # Replace '3.x' with your desired Python version
+        python-version: 3.8  # Replace '3.x' with your desired Python version
 
     - name: Run Python script
       run: python dailySchedule.py  # Replace 'your_script.py' with the name of your Python script
