@@ -5,11 +5,13 @@ from kickbot.kickBot import kickbot_route
 import os
 
 server = Flask(__name__)
+
+schedule_key = os.environ.get('SCHEDULE_KEY')
 @server.route('/' , methods = ["GET"])
 def getMessage():
     return "Rui Han's bot farm", 200
 
-@server.route('/daily', methods = ['GET'])
+@server.route('/daily' + schedule_key, methods = ['GET'])
 def dailyRunner():
     dailyJob()
 
