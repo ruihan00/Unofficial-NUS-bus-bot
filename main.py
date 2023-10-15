@@ -1,5 +1,5 @@
 from flask import Flask, request
-from affirmation_bot.affirmation_bot import affirmations_bot_route
+from affirmation_bot.affirmation_bot import affirmations_bot_route, dailyJob
 from busbot.main import bus_bot_route
 from kickbot.kickBot import kickbot_route
 import os
@@ -9,6 +9,9 @@ server = Flask(__name__)
 def getMessage():
     return "Rui Han's bot farm", 200
 
+@server.route('/daily', methods = ['GET'])
+def dailyRunner():
+    dailyJob()
 
 server.register_blueprint(affirmations_bot_route, url_prefix='/affirmationsBot')
 server.register_blueprint(bus_bot_route, url_prefix='/busBot')
