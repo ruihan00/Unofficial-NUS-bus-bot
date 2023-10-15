@@ -3,9 +3,7 @@ name: Daily Schedule
 on:
   schedule:
     - cron: '0 2 * * *'  # Runs every day at 10 AM SGT (2 AM UTC)
-  push:
-    branches:
-      - test  # Run on pushes to the "test" branch
+
 jobs:
   run_python_script:
     runs-on: ubuntu-latest
