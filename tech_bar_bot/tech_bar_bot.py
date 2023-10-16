@@ -57,7 +57,7 @@ def edit_reminder(chatid, messageid):
         formattedText += "\n\n<b>Quarantined Users</b>"
         for user in user_quarantined:
             formattedText += f"\n@{user['username']}"
-    tech_bar_bot.edit_message_text(formattedText, chatid, messageid)
+    tech_bar_bot.edit_message_text(formattedText, chatid, messageid, parse_mode="HTML", reply_markup=gen_markup(chatid)
 
 
 @tech_bar_bot.callback_query_handler(func=lambda call: True)
