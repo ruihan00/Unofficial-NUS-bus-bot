@@ -15,6 +15,7 @@ tech_bar_bot = TeleBot(token)
 tech_bar_route = Blueprint('tech_bar_route', __name__)
 
 URL_PREFIX = "techBarBot"
+
 def gen_markup(chatid):
     markup = InlineKeyboardMarkup()
     markup.row_width = 1
