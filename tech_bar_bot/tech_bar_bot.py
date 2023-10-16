@@ -10,9 +10,9 @@ import json
 import random
 import os
 from firebase.tech_bar_database import add_user, remove_user, get_all_users, extend_user_quarantine_date, get_at_risk_users, get_quarantined_users, get_leaderboard, getChats, init_tech_bar, StatusCodes
-token = "5974070325:AAHiEPbY39eMAnmkTKGNqJ1UEcjFp9ALIkw"
+token = os.environ.get('TECH_BAR_BOT_TOKEN')
 tech_bar_bot = TeleBot(token)
-tech_bar_route = Blueprint('affirmations_routes', __name__)
+tech_bar_route = Blueprint('tech_bar_route', __name__)
 
 URL_PREFIX = "techBarBot"
 def gen_markup(chatid):
@@ -175,15 +175,16 @@ def dailyReminder():
 
 
 @tech_bar_route.route(f'/{token}', methods = ["POST"])
-def getAffirmationMessage():
+def getMessage():
     json_string = request.get_data().decode('utf-8')
     update = types.Update.de_json(json_string)
     tech_bar_bot.process_new_updates([update])
     return "!", 200
 
 @tech_bar_route.route('')
-def affirmationWebhook():
+def setWebhook():
     tech_bar_bot.delete_webhook()
     tech_bar_bot.remove_webhook()
     tech_bar_bot.set_webhook(url = f"https://bus-bot.onrender.com/{URL_PREFIX}/" + token)
     return "Webhook set", 200
+
