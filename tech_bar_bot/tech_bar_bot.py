@@ -58,7 +58,7 @@ def edit_reminder(chatid, messageid):
         formattedText += "\n\n<b>Quarantined Users</b>"
         for user in user_quarantined:
             formattedText += f"\n@{user['username']}"
-    tech_bar_bot.edit_message_text(formattedText, chatid, messageid, parse_mode="HTML", reply_markup=gen_markup(chatid)
+    tech_bar_bot.edit_message_text(formattedText, chatid, messageid, parse_mode="HTML", reply_markup=gen_markup(chatid))
 
 
 @tech_bar_bot.callback_query_handler(func=lambda call: True)
@@ -146,6 +146,9 @@ def getLeaderboard(message):
     tech_bar_bot.send_message(message.chat.id,formatted_message, parse_mode="HTML" , reply_markup=gen_leaderboard_markup(message.chat.id, 'QS'))
     return
 
+@tech_bar_bot.message_handler(commands=["time"])
+def getTime(message):
+    tech_bar_bot.reply_to(message, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
 def reminder(chatid):
     user_at_risk = get_at_risk_users(chatid)

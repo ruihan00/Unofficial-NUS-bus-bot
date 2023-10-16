@@ -141,6 +141,12 @@ def update_users_days_since_last_quarantine(chatid):
                     'days_since_last_quarantine': user['days_since_last_quarantine'] + 1
                 }
             )
+            if parse_datetime(user['quarantine_date']) > datetime.now() + 1:
+                subscription_ref.document(user['userid']).update(
+                    {
+                        'days_since_last_quarantine': 0
+                    }
+                )
         return StatusCodes.OK
     except Exception as e:
         print(e)
