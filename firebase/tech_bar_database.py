@@ -136,13 +136,13 @@ def update_users_days_since_last_quarantine(chatid):
             user = user.to_dict()
             if user['quarantine_date'] is None or parse_datetime(user['quarantine_date']) < datetime.now() + timedelta(days=1):
                 return StatusCodes.OK
-            subscription_ref.document(user['userid']).update(
+            subscription_ref(chatid).document(user['userid']).update(
                 {
                     'days_since_last_quarantine': user['days_since_last_quarantine'] + 1
                 }
             )
             if parse_datetime(user['quarantine_date']) > datetime.now() + 1:
-                subscription_ref.document(user['userid']).update(
+                subscription_ref(chatid).document(user['userid']).update(
                     {
                         'days_since_last_quarantine': 0
                     }
@@ -169,7 +169,8 @@ def update_user_last_login(userid, chatid):
         else :
             user_ref.update(
                 {
-                    'last_login': datetime.now().strftime(datetime_format)
+                    'last_login': datetime.now().strftime(datetime_format),
+                    'login_streak': 1
                 }
             )
         

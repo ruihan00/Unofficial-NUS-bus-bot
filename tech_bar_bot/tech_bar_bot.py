@@ -9,7 +9,7 @@ from telebot import TeleBot, types
 import json
 import random
 import os
-from firebase.tech_bar_database import add_user, remove_user, get_all_users, extend_user_quarantine_date, get_at_risk_users, get_quarantined_users, get_leaderboard, getChats, init_tech_bar, StatusCodes
+from firebase.tech_bar_database import add_user, remove_user, get_all_users, extend_user_quarantine_date, get_at_risk_users, get_quarantined_users, get_leaderboard, getChats, init_tech_bar, StatusCodes, update_users_days_since_last_quarantine
 token = os.environ.get('TECH_BAR_BOT_TOKEN')
 tech_bar_bot = TeleBot(token)
 tech_bar_route = Blueprint('tech_bar_route', __name__)
@@ -174,6 +174,8 @@ def dailyReminder():
     chatids = getChats()
     print(chatids)
     for chatid in chatids:
+        update_users_days_since_last_quarantine(chatid)
+
         reminder(chatid)
 
 
