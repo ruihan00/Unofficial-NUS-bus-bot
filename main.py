@@ -2,7 +2,7 @@ from flask import Flask, request
 from affirmation_bot.affirmation_bot import affirmations_bot_route, dailyJob
 from busbot.main import bus_bot_route
 from kickbot.kickBot import kickbot_route
-from tech_bar_bot.tech_bar_bot import tech_bar_route, URL_PREFIX, dailyReminder()
+from tech_bar_bot.tech_bar_bot import tech_bar_route, URL_PREFIX, dailyReminder
 import os
 
 server = Flask(__name__)
