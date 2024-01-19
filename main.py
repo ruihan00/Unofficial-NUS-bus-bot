@@ -23,6 +23,6 @@ server.register_blueprint(affirmations_bot_route, url_prefix='/affirmationsBot')
 server.register_blueprint(bus_bot_route, url_prefix='/busBot')
 server.register_blueprint(kickbot_route, url_prefix='/kickBot')
 server.register_blueprint(tech_bar_route, url_prefix=f"/{URL_PREFIX}")
-server.register_blueprint(tech_bar_route, url_prefix=f"/{GEMINI_URL_PREFIX}")
+server.register_blueprint(gemini_img_route, url_prefix=f"/{GEMINI_URL_PREFIX}")
 if __name__ == "__main__":
     server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
