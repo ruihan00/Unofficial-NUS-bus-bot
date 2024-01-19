@@ -1,6 +1,6 @@
 import telebot
 import base64
-from image_recognition import recognise_image
+from gemini_image_recognition_bot.image_recognition import recognise_image
 import os
 from flask import Blueprint, request
 from telebot import types
