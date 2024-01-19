@@ -8,7 +8,6 @@ from flask import Flask, request, Blueprint
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 token = os.environ.get("BUS_BOT_KEY")
-mealToken = os.environ.get("MEAL_BOT_TOKEN")
 bot = TeleBot(token)
 authKey = HTTPBasicAuth(os.environ.get("API_USERNAME"), os.environ.get("API_PW"))
 url = os.environ.get("API_URL")
