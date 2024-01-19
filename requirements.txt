@@ -4,3 +4,5 @@ flask
 decouple
 python-dotenv
 firebase-admin
+vertexai
+google-cloud-aiplatform
