@@ -33,7 +33,7 @@ def handlePhoto(photo):
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_message(message.chat.id, "Hello i am here to assist in injury reporting, send me a photo of a injury and i will let you know what kind of injury it is to the best of my ability!s")
+    bot.send_message(message.chat.id, "Hello i am here to assist in injury reporting, send me a photo of a injury and i will let you know what kind of injury it is to the best of my ability!")
 
 @gemini_img_route.route(f'/{API_TOKEN}', methods = ["POST"])
 def getImageRequest():

@@ -1,7 +1,7 @@
 import os 
 import base64 
  
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '../auth.json' 
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/etc/secrets/auth.json' 
  
 from vertexai.preview.generative_models import GenerativeModel, Part 
 
@@ -37,7 +37,7 @@ def recognise_image(file_path):
     model = GenerativeModel("gemini-pro-vision")
     responses =  model.generate_content( 
         [Part.from_data(data=file_to_b64string(file_path),mime_type="image/jpeg") , 
-         "Describe what injury has happened and the extent of the injury and where it occured, Please be conservative in your prediction of the injury."]
+         "Describe what injury has happened and the extent of the injury and where it occured, Please be conservative in your prediction of the injury, reject the image if it is not a injury or if it is not clear enough to make a prediction"]
     ) 
  
     return responses.candidates[0].content.parts[0].text.strip()
