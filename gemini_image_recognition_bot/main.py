@@ -44,7 +44,6 @@ def getImageRequest():
 
 @gemini_img_route.route('')
 def geminiWebhook():
-    bot.delete_webhook()
-    bot.remove_webhook()
+
     bot.set_webhook(url = "https://bus-bot.onrender.com/geminiimagerec/" + API_TOKEN)
     return "Webhook set", 200
