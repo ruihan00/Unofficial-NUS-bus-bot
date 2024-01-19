@@ -41,4 +41,13 @@ def recognise_image(file_path):
     ) 
  
     return responses.candidates[0].content.parts[0].text.strip()
-
+def recognise_image_from_data(data):
+    model = GenerativeModel("gemini-pro-vision")
+    print('data obtained')
+    responses =  model.generate_content( 
+        [Part.from_data(data=base64.b64encode(mirror_image(data)).decode('utf-8')
+                        ,mime_type="image/jpeg") , 
+         "Describe what injury has happened and the extent of the injury and where it occured, Please be conservative in your prediction of the injury, reject the image if it is not a injury or if it is not clear enough to make a prediction"]
+    ) 
+ 
+    return responses.candidates[0].content.parts[0].text.strip()

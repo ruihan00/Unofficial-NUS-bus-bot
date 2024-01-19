@@ -1,6 +1,6 @@
 import telebot
 import base64
-from gemini_image_recognition_bot.image_recognition import recognise_image
+from gemini_image_recognition_bot.image_recognition import recognise_image, recognise_image_from_data
 import os
 from flask import Blueprint, request
 from telebot import types
@@ -17,18 +17,14 @@ def handlePhoto(photo):
     file = bot.get_file(fileid)
     file_path = file.file_path
     downloaded_file = bot.download_file(file_path)
-    bot.send_message(photo.chat.id, "Processing image... (may take up to 10 seconds)")
-
-    with open(f'${fileid}.jpg','wb') as new_file:
-        new_file.write(downloaded_file)
+    bot.send_message(photo.chat.id, "Processing image... (may take up to 60 seconds)")
     try:
-        result = recognise_image(f'${fileid}.jpg')
+        result = recognise_image_from_data(downloaded_file)
     except Exception as e:
         bot.send_message(photo.chat.id, f"Error processing image: {e}")
         return
-    prediction = result.candidates[0].content.parts[0].text.strip()
+    prediction = result
     bot.send_message(photo.chat.id, "This image shows: \n" + prediction)
-    os.remove(f'${fileid}.jpg')
 
 
 @bot.message_handler(commands=['start'])
@@ -48,3 +44,4 @@ def geminiWebhook():
     bot.remove_webhook()
     bot.set_webhook(url = "https://bus-bot.onrender.com/geminiimagerec/" + API_TOKEN)
     return API_TOKEN, 200
+
