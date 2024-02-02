@@ -2,6 +2,7 @@ import os
 import base64
 import json
 from io import BytesIO
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/etc/secrets/auth.json' 
 
 from PIL import Image
 
