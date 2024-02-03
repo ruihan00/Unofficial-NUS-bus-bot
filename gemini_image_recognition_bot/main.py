@@ -82,7 +82,7 @@ def genFinalSubmissionMarkup():
 def start(message):
     bot.send_message(message.chat.id, 
                      """Hello! I am here to assist you in reporting your workplace incident to the Ministry of Manpower.\n
-I am a PROOF of CONCEPT, so if my responses are slow I would like to be sorry to keep you waiting.
+I am a PROOF of CONCEPT, I seek your understanding and patience as my response may take a little longer to process.
 """, reply_markup=genStartMarkup())
     # bot.send_message(message.chat.id, "To start the process, send me a photo ID image.")
 
@@ -147,7 +147,7 @@ If you are ready to report, please send me a picture of the injured person with 
     elif call.data == 'final':
         bot.send_message(call.message.chat.id, "Your injury report has been submitted to the Ministry of Manpower. Thank you for using our service!")
         bot.edit_message_reply_markup(call.message.chat.id, reply_markup=None, message_id=call.message.message_id)
-        bot.answer_callback_query(call.id, "Great! I have submitted the details", show_alert=True)
+        bot.answer_callback_query(call.id, "Great! You have submitted the details!", show_alert=True)
         return
     bot.answer_callback_query(call.id, "Got it!")
     bot.edit_message_reply_markup(call.message.chat.id, reply_markup=None, message_id=call.message.message_id)
