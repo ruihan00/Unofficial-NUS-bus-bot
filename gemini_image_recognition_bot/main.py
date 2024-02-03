@@ -310,7 +310,7 @@ def handle_location(message):
 
 
 def confirm_location(message):
-    bot.send_message(message.chat.id, f"Heres the location i got!\n {user_details[str(message.chat.id)]['location']}", reply_markup=genConfirmLocationMarkup())
+    bot.send_message(message.chat.id, f"Heres the location i got!\n\n{user_details[str(message.chat.id)]['location']}", reply_markup=genConfirmLocationMarkup())
 
 
 def handle_final_submission(message):
