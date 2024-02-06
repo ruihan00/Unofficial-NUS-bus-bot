@@ -13,7 +13,7 @@ VERTEX_AI_EMBEDDING_MODEL = 'textembedding-gecko@003'
 client = OpenAI()
 GPT_MODEL = "gpt-3.5-turbo-0613"
 
-DATA_FOLDER = Path('data/')
+DATA_FOLDER = Path('./data/')
 target_job_roles_df = pd.read_pickle(
     DATA_FOLDER / "ict_or_retail_job_roles_df.pkl")
 
@@ -56,7 +56,7 @@ class VertexAIEmbeddingFunction(chromadb.EmbeddingFunction):
 
 
 vertextai_emb_fn = VertexAIEmbeddingFunction()
-chroma_client = chromadb.PersistentClient(path='data/chromadb/')
+chroma_client = chromadb.PersistentClient(path='./data/chromadb/')
 
 target_job_role_collection = chroma_client.get_or_create_collection(
     name="target_job_roles",
