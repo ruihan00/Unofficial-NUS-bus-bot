@@ -5,9 +5,9 @@ import telebot
 from telebot import types
 from dotenv import load_dotenv
 from flask import Flask, request, Blueprint
-from src import attributes, memory
-from src.conversation_assistant import ConversationAssistant
-from src.tools import functions, tools
+from careerkaki.src import attributes, memory
+from careerkaki.src.conversation_assistant import ConversationAssistant
+from careerkaki.src.tools import functions, tools
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/etc/secrets/auth.json'
 os.environ["OPENAI_API_KEY"] = os.getenv('OPENAI_API_KEY')
