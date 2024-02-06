@@ -13,3 +13,4 @@ openai==1.9.0
 pathlib
 tenacity
 pandas
+sqlite3 == 3.35.0
