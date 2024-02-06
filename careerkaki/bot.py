@@ -1,5 +1,7 @@
 
 import os
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/etc/secrets/auth.json'
+os.environ["OPENAI_API_KEY"] = os.getenv('OPENAI_API_KEY')
 
 import telebot
 from telebot import types
