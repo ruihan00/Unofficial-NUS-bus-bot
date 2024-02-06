@@ -12,8 +12,8 @@ from src.tools import functions, tools
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/etc/secrets/auth.json'
 os.environ["OPENAI_API_KEY"] = os.getenv('OPENAI_API_KEY')
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-USER_ID = int(os.getenv("USER_ID"))
+BOT_TOKEN = os.getenv("CK_BOT_TOKEN")
+USER_ID = int(os.getenv("CK_USER_ID"))
 CHAT_ID = USER_ID  # for private chats, this is equal
 bot = telebot.TeleBot(BOT_TOKEN)
 MAX_CHAT_HISTORY_LEN = 5000
