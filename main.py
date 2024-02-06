@@ -4,6 +4,7 @@ from busbot.main import bus_bot_route
 from kickbot.kickBot import kickbot_route
 from tech_bar_bot.tech_bar_bot import tech_bar_route, URL_PREFIX, dailyReminder
 from gemini_image_recognition_bot.main import gemini_img_route, GEMINI_URL_PREFIX
+from careerkaki import ck_route
 import os
 
 server = Flask(__name__)
@@ -24,5 +25,6 @@ server.register_blueprint(bus_bot_route, url_prefix='/busBot')
 server.register_blueprint(kickbot_route, url_prefix='/kickBot')
 server.register_blueprint(tech_bar_route, url_prefix=f"/{URL_PREFIX}")
 server.register_blueprint(gemini_img_route, url_prefix=f"/{GEMINI_URL_PREFIX}")
+server.register_blueprint(ck_route, url_prefix='/ck')
 if __name__ == "__main__":
     server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
