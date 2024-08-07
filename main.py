@@ -4,7 +4,6 @@ from busbot.main import bus_bot_route
 from kickbot.kickBot import kickbot_route
 from tech_bar_bot.tech_bar_bot import tech_bar_route, URL_PREFIX, dailyReminder
 from gemini_image_recognition_bot.main import gemini_img_route, GEMINI_URL_PREFIX
-from careerkaki.bot import ck_route
 import os
 
 server = Flask(__name__)
